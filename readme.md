@@ -13,7 +13,7 @@ An intelligent RSS feed watcher that monitors your favorite RSS feeds, filters c
 
 ## Demo / Screenshots
 This is how the email looks like (will improve the email template with time)
-<img width="1395" height="893" alt="Screenshot 2025-11-09 at 5 41 50 PM" src="https://github.com/user-attachments/assets/8e0a0ae2-adcb-4321-9bf6-accbc200aaac" />
+<img width="1050" height="781" alt="Screenshot 2025-11-09 at 6 12 33 PM" src="https://github.com/user-attachments/assets/e53d13ac-45b3-47ed-9280-c282aa3f9dcd" />
 
 
 ## Prerequisites
