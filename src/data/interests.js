@@ -1,0 +1,16 @@
+export const interests = [
+  "Software Engineering",
+  "Database internals",
+  "Web Development",
+  "Frontend Engineering",
+  "Backend Engineering",
+  "Full Stack Engineering",
+  "Artificial Intelligence",
+  "Generative AI",
+  "Problem Solving",
+  "System Design",
+  "Project building",
+  "Philosophy",
+  "Good Engineering Practices",
+  "Topics that every software engineer should know",
+];

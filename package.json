@@ -1,0 +1,23 @@
+{
+  "name": "rss-subscriber",
+  "version": "1.0.0",
+  "description": "A script to subscribe to rss feeds and get nofitications based on new updates in rss feeds",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "type": "module",
+  "author": "hritik2002",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.10",
+    "openai": "^6.8.1",
+    "rss-parser": "^3.13.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  }
+}
