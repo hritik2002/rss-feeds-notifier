@@ -3,14 +3,31 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 
+// Determine if we should use secure (SSL) or TLS based on port
+const port = parseInt(process.env.SMTP_PORT || "465");
+const useSecure = port === 465; // Port 465 uses SSL, port 587 uses TLS
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: true, // true for port 465 (SSL)
+  port: port,
+  secure: useSecure, // true for port 465 (SSL), false for port 587 (TLS)
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  connectionTimeout: 10000, // 10 seconds connection timeout
+  greetingTimeout: 10000, // 10 seconds greeting timeout
+  socketTimeout: 10000, // 10 seconds socket timeout
+  // For cloud environments like Railway
+  tls: {
+    rejectUnauthorized: false, // Allow self-signed certificates if needed
+  },
+  // Connection pool settings
+  pool: true,
+  maxConnections: 1,
+  maxMessages: 3,
+  rateDelta: 1000,
+  rateLimit: 5,
 });
 
 export async function sendNewPostEmail({
@@ -88,9 +105,25 @@ export async function sendNewPostEmail({
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`📨 Email sent: ${postTitle}`);
+    console.log(`Email sent: ${postTitle}`);
   } catch (err) {
-    console.error(err);
-    console.log(`❌ Email send failed: ${postTitle}`);
+    console.error(`Email send failed: ${postTitle}`);
+    console.error("Error details:", {
+      code: err.code,
+      command: err.command,
+      message: err.message,
+    });
+    
+    if (err.code === "ETIMEDOUT" || err.code === "ECONNREFUSED") {
+      console.log("Retrying email send after connection error...");
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await transporter.sendMail(mailOptions);
+        console.log(`Email sent (retry successful): ${postTitle}`);
+      } catch (retryErr) {
+        console.error(`Email send failed after retry: ${postTitle}`);
+        console.error("Retry error:", retryErr.message);
+      }
+    }
   }
 }

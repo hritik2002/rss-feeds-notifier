@@ -199,6 +199,60 @@ rss-subsriber/
 └── readme.md
 ```
 
+## Troubleshooting
+
+### Connection Timeout Errors (Railway/Cloud Deployments)
+
+If you're experiencing `ETIMEDOUT` or connection timeout errors when deploying to Railway or other cloud platforms:
+
+**Solution 1: Use Port 587 with TLS instead of 465**
+Some cloud providers block port 465. Try using port 587 with TLS:
+```env
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_app_password
+```
+
+**Solution 2: Use a Cloud Email Service**
+Consider using email services designed for cloud deployments:
+- **Resend** (recommended): `SMTP_HOST=smtp.resend.com`, `SMTP_PORT=465`
+- **SendGrid**: `SMTP_HOST=smtp.sendgrid.net`, `SMTP_PORT=587`
+- **Mailgun**: `SMTP_HOST=smtp.mailgun.org`, `SMTP_PORT=587`
+
+**Solution 3: Check Railway Network Settings**
+- Ensure your Railway service allows outbound connections
+- Check if there are any firewall rules blocking SMTP ports
+- Verify your SMTP credentials are correct
+
+### Email Not Sending
+
+1. Verify your SMTP credentials in `.env`
+2. For Gmail, ensure you're using an App Password, not your regular password
+3. Check that `SMTP_PORT` matches your provider (465 for SSL, 587 for TLS)
+4. Review the console logs for specific error messages
+5. The application now includes automatic retry logic for connection errors
+
+### OpenAI API Errors
+
+1. Verify your `OPENAI_API_KEY` is correct in `.env`
+2. Check your OpenAI account has sufficient credits
+3. Review API rate limits if you're checking many feeds frequently
+
+### No Notifications Received
+
+1. Check that posts are actually relevant to your interests (the AI filters them)
+2. Verify the database is tracking feeds correctly: `GET http://localhost:3000/`
+3. Manually trigger a check: `POST http://localhost:3000/watch-rss-feeds`
+4. Check console logs for any errors during feed processing
+
+### Database Issues
+
+If you need to reset the database:
+1. Stop the application
+2. Delete `feeds.db`
+3. Restart the application (it will create a new database)
+
 ## License
 
 ISC
