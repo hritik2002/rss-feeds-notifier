@@ -21,7 +21,7 @@ This is how the email looks like (will improve the email template with time)
 - Node.js (v16 or higher)
 - npm or yarn
 - An OpenAI API key (for content filtering)
-- SMTP email credentials (Gmail, Outlook, or any SMTP server)
+- A Resend API key (get one for free at [resend.com](https://resend.com))
 
 ## Installation
 
@@ -41,18 +41,22 @@ This is how the email looks like (will improve the email template with time)
    # OpenAI Configuration
    OPENAI_API_KEY=your_openai_api_key_here
 
-   # SMTP Email Configuration
-   SMTP_HOST=smtp.gmail.com
-   SMTP_PORT=465
-   SMTP_USER=your_email@gmail.com
-   SMTP_PASS=your_app_password_here
+   # Resend API Configuration
+   RESEND_API_KEY=re_your_resend_api_key
+   RESEND_FROM_EMAIL=onboarding@resend.dev
    MAIL_TO=recipient@example.com
 
    # Server Configuration (optional)
    PORT=3000
    ```
 
-   **Note for Gmail users**: You'll need to generate an [App Password](https://support.google.com/accounts/answer/185833) instead of using your regular password.
+   **Notes:**
+   - **Resend API Key**: Get your API key from [resend.com](https://resend.com) (free tier available)
+   - **From Email**: 
+     - `RESEND_FROM_EMAIL` is optional - if not set, defaults to `onboarding@resend.dev`
+     - You **cannot** use Gmail, Yahoo, or other personal email domains (they must be verified)
+     - Use `onboarding@resend.dev` for testing, or verify your own domain at [resend.com/domains](https://resend.com/domains)
+     - The application automatically detects unverified domains and uses `onboarding@resend.dev` as a fallback
 
 ## Configuration
 
@@ -201,37 +205,37 @@ rss-subsriber/
 
 ## Troubleshooting
 
-### Connection Timeout Errors (Railway/Cloud Deployments)
-
-If you're experiencing `ETIMEDOUT` or connection timeout errors when deploying to Railway or other cloud platforms:
-
-**Solution 1: Use Port 587 with TLS instead of 465**
-Some cloud providers block port 465. Try using port 587 with TLS:
-```env
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
-```
-
-**Solution 2: Use a Cloud Email Service**
-Consider using email services designed for cloud deployments:
-- **Resend** (recommended): `SMTP_HOST=smtp.resend.com`, `SMTP_PORT=465`
-- **SendGrid**: `SMTP_HOST=smtp.sendgrid.net`, `SMTP_PORT=587`
-- **Mailgun**: `SMTP_HOST=smtp.mailgun.org`, `SMTP_PORT=587`
-
-**Solution 3: Check Railway Network Settings**
-- Ensure your Railway service allows outbound connections
-- Check if there are any firewall rules blocking SMTP ports
-- Verify your SMTP credentials are correct
-
 ### Email Not Sending
 
-1. Verify your SMTP credentials in `.env`
-2. For Gmail, ensure you're using an App Password, not your regular password
-3. Check that `SMTP_PORT` matches your provider (465 for SSL, 587 for TLS)
-4. Review the console logs for specific error messages
-5. The application now includes automatic retry logic for connection errors
+1. **Verify Resend API Key**:
+   - Ensure `RESEND_API_KEY` is set correctly in your `.env` file
+   - Get your API key from [resend.com](https://resend.com) dashboard
+   - Check that the API key starts with `re_`
+
+2. **Domain Verification Issues**:
+   - If you see "domain is not verified" errors:
+     - Use `onboarding@resend.dev` for testing (this is the default)
+     - You **cannot** use Gmail, Yahoo, Hotmail, or Outlook addresses
+     - To use your own email, verify your domain at [resend.com/domains](https://resend.com/domains)
+   - The application automatically falls back to `onboarding@resend.dev` if an unverified domain is detected
+
+3. **Check Environment Variables**:
+   - Verify `MAIL_TO` is set correctly (recipient email address)
+   - `RESEND_FROM_EMAIL` is optional - defaults to `onboarding@resend.dev`
+   - Ensure all required variables are set in your `.env` file
+
+4. **Review Console Logs**:
+   - Check for specific error messages from Resend API
+   - Common errors:
+     - Invalid API key: Verify your `RESEND_API_KEY`
+     - Domain not verified: Use `onboarding@resend.dev` or verify your domain
+     - Rate limit exceeded: Check your Resend account limits
+
+5. **For Railway/Cloud Deployments**:
+   - Resend API uses HTTP/HTTPS (port 443), which works reliably in cloud environments
+   - No SMTP port blocking issues
+   - Check Railway logs for any network-related errors
+   - Verify your environment variables are set in Railway's dashboard
 
 ### OpenAI API Errors
 
