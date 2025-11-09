@@ -1,4 +1,4 @@
-# RSS Subscriber
+# Monitors engineering blogs from top orgs (Weekend Project)
 
 An intelligent RSS feed watcher that monitors your favorite RSS feeds, filters content based on your interests using AI, and sends you email notifications for relevant new posts.
 
@@ -13,7 +13,7 @@ An intelligent RSS feed watcher that monitors your favorite RSS feeds, filters c
 
 ## Demo / Screenshots
 This is how the email looks like (will improve the email template with time)
-<img width="1395" height="893" alt="Screenshot 2025-11-09 at 5 41 50 PM" src="https://github.com/user-attachments/assets/8e0a0ae2-adcb-4321-9bf6-accbc200aaac" />
+<img width="1050" height="781" alt="Screenshot 2025-11-09 at 6 12 33 PM" src="https://github.com/user-attachments/assets/e53d13ac-45b3-47ed-9280-c282aa3f9dcd" />
 
 
 ## Prerequisites
@@ -202,60 +202,6 @@ rss-subsriber/
 ├── package.json
 └── readme.md
 ```
-
-## Troubleshooting
-
-### Email Not Sending
-
-1. **Verify Resend API Key**:
-   - Ensure `RESEND_API_KEY` is set correctly in your `.env` file
-   - Get your API key from [resend.com](https://resend.com) dashboard
-   - Check that the API key starts with `re_`
-
-2. **Domain Verification Issues**:
-   - If you see "domain is not verified" errors:
-     - Use `onboarding@resend.dev` for testing (this is the default)
-     - You **cannot** use Gmail, Yahoo, Hotmail, or Outlook addresses
-     - To use your own email, verify your domain at [resend.com/domains](https://resend.com/domains)
-   - The application automatically falls back to `onboarding@resend.dev` if an unverified domain is detected
-
-3. **Check Environment Variables**:
-   - Verify `MAIL_TO` is set correctly (recipient email address)
-   - `RESEND_FROM_EMAIL` is optional - defaults to `onboarding@resend.dev`
-   - Ensure all required variables are set in your `.env` file
-
-4. **Review Console Logs**:
-   - Check for specific error messages from Resend API
-   - Common errors:
-     - Invalid API key: Verify your `RESEND_API_KEY`
-     - Domain not verified: Use `onboarding@resend.dev` or verify your domain
-     - Rate limit exceeded: Check your Resend account limits
-
-5. **For Railway/Cloud Deployments**:
-   - Resend API uses HTTP/HTTPS (port 443), which works reliably in cloud environments
-   - No SMTP port blocking issues
-   - Check Railway logs for any network-related errors
-   - Verify your environment variables are set in Railway's dashboard
-
-### OpenAI API Errors
-
-1. Verify your `OPENAI_API_KEY` is correct in `.env`
-2. Check your OpenAI account has sufficient credits
-3. Review API rate limits if you're checking many feeds frequently
-
-### No Notifications Received
-
-1. Check that posts are actually relevant to your interests (the AI filters them)
-2. Verify the database is tracking feeds correctly: `GET http://localhost:3000/`
-3. Manually trigger a check: `POST http://localhost:3000/watch-rss-feeds`
-4. Check console logs for any errors during feed processing
-
-### Database Issues
-
-If you need to reset the database:
-1. Stop the application
-2. Delete `feeds.db`
-3. Restart the application (it will create a new database)
 
 ## License
 
