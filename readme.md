@@ -11,6 +11,11 @@ An intelligent RSS feed watcher that monitors your favorite RSS feeds, filters c
 - 🌐 **REST API**: Simple Express server with endpoints to view feeds and manually trigger checks
 - 🔒 **SSL Support**: Handles feeds with self-signed or problematic SSL certificates
 
+## Demo / Screenshots
+This is how the email looks like (will improve the email template with time)
+<img width="1395" height="893" alt="Screenshot 2025-11-09 at 5 41 50 PM" src="https://github.com/user-attachments/assets/8e0a0ae2-adcb-4321-9bf6-accbc200aaac" />
+
+
 ## Prerequisites
 
 - Node.js (v16 or higher)
