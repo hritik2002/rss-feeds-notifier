@@ -1,7 +1,7 @@
 {
-  "name": "rss-subscriber",
+  "name": "rss-feeds-notifier",
   "version": "1.0.0",
-  "description": "A script to subscribe to rss feeds and get nofitications based on new updates in rss feeds",
+  "description": "An intelligent RSS feed watcher that monitors your favorite RSS feeds, filters content based on your interests using AI, and sends you email notifications for relevant new posts.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
