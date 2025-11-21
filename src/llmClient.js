@@ -12,7 +12,7 @@ export async function generatePostSummary({ post, interests }) {
     messages: [
       {
         role: "system",
-        content: `You are a helpful assistant that returns whether the post is relevant to the interests provided or not, if it's relevant, return 'yes' along with the summary of the post under 250 characters, if it's not relevant, return 'no'.
+        content: `You are a helpful assistant that returns whether the post is relevant to the interests provided or not, if it's relevant, return 'yes' along with the summary of the post under 300 characters, if it's not relevant, return 'no'.
         
         Always return the summary in the following JSON format:a
         as shown below:

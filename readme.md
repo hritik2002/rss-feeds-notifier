@@ -161,15 +161,213 @@ The server will:
 
 ### API Endpoints
 
-- **GET `/`**: Returns all tracked feeds with their latest post information
-  ```bash
-  curl http://localhost:3000/
-  ```
+The server exposes a REST API for managing feeds and triggering checks. All endpoints are available at `http://localhost:3000` (or your configured PORT).
 
-- **POST `/watch-rss-feeds`**: Manually trigger an RSS feed check
-  ```bash
-  curl -X POST http://localhost:3000/watch-rss-feeds
-  ```
+**Quick Reference:**
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/` | Get all tracked feeds from database |
+| `POST` | `/watch-rss-feeds` | Manually trigger RSS feed check |
+| `POST` | `/add-to-db` | Add a single feed to database |
+| `POST` | `/refresh-feeds-db` | Replace all feeds in database |
+
+---
+
+#### GET `/`
+Returns all tracked feeds with their latest post information from the database.
+
+**Request:**
+```bash
+curl http://localhost:3000/
+```
+
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "url": "https://blog.pragmaticengineer.com/rss/",
+    "title": "The Pragmatic Engineer",
+    "last_link": "https://blog.pragmaticengineer.com/latest-post",
+    "last_updated": "2025-11-12T10:30:00.000Z"
+  },
+  ...
+]
+```
+
+---
+
+#### POST `/watch-rss-feeds`
+Manually trigger an RSS feed check. This will process all feeds configured in `src/data/feeds.js`, check for new posts, analyze them with AI, and send email notifications for relevant content.
+
+**Request:**
+```bash
+curl -X POST http://localhost:3000/watch-rss-feeds
+```
+
+**Response:**
+```
+✅ RSS feeds watched
+```
+
+**Note:** This operation may take some time depending on the number of feeds and network conditions.
+
+---
+
+#### POST `/add-to-db`
+Add a single feed to the database and process it immediately. This is useful for adding new feeds without modifying the code.
+
+**Request:**
+```bash
+curl -X POST http://localhost:3000/add-to-db \
+  -H "Content-Type: application/json" \
+  -d '{
+    "feed": {
+      "url": "https://example.com/feed"
+    }
+  }'
+```
+
+**Request Body:**
+```json
+{
+  "feed": {
+    "url": "https://example.com/feed"
+  }
+}
+```
+
+**Response (Success):**
+```json
+{
+  "status": "success",
+  "message": "Feed added to db"
+}
+```
+
+**Response (Error):**
+```json
+{
+  "status": "error",
+  "message": "Error message here"
+}
+```
+
+**Note:** The feed will be processed immediately - if there's a new post, you'll receive an email notification if it matches your interests.
+
+---
+
+#### POST `/refresh-feeds-db`
+Replace all feeds in the database with a new set. This clears the existing feeds and inserts the provided ones. Useful for bulk updates or syncing feeds from an external source.
+
+**Request:**
+```bash
+curl -X POST http://localhost:3000/refresh-feeds-db \
+  -H "Content-Type: application/json" \
+  -d '{
+    "feeds": [
+      {
+        "id": 1,
+        "url": "https://blog.pragmaticengineer.com/rss/",
+        "title": "The Pragmatic Engineer",
+        "last_link": "https://blog.pragmaticengineer.com/latest-post",
+        "last_updated": "2025-11-12T10:30:00.000Z"
+      },
+      {
+        "id": 2,
+        "url": "https://overreacted.io/rss.xml",
+        "title": "Overreacted",
+        "last_link": "https://overreacted.io/latest-post",
+        "last_updated": "2025-11-12T09:15:00.000Z"
+      }
+    ]
+  }'
+```
+
+**Request Body:**
+```json
+{
+  "feeds": [
+    {
+      "id": 1,
+      "url": "https://example.com/feed",
+      "title": "Feed Title",
+      "last_link": "https://example.com/latest-post",
+      "last_updated": "2025-11-12T10:30:00.000Z"
+    }
+  ]
+}
+```
+
+**Response:**
+```
+Feeds added to db
+```
+
+**Response (Error):**
+```
+Error adding feeds to db
+```
+
+**Note:** 
+- This endpoint **clears all existing feeds** before inserting the new ones
+- The `id` field is optional - if not provided, SQLite will auto-generate it
+- The `last_updated` field is optional - if not provided, it defaults to the current timestamp
+
+### API Usage Examples
+
+#### Using JavaScript (fetch)
+```javascript
+// Get all feeds
+const feeds = await fetch('http://localhost:3000/').then(r => r.json());
+
+// Manually trigger feed check
+await fetch('http://localhost:3000/watch-rss-feeds', { method: 'POST' });
+
+// Add a new feed
+await fetch('http://localhost:3000/add-to-db', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    feed: { url: 'https://example.com/feed' }
+  })
+});
+
+// Refresh all feeds
+await fetch('http://localhost:3000/refresh-feeds-db', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    feeds: [
+      { url: 'https://example.com/feed', title: 'Example Feed' }
+    ]
+  })
+});
+```
+
+#### Using Python (requests)
+```python
+import requests
+
+# Get all feeds
+feeds = requests.get('http://localhost:3000/').json()
+
+# Manually trigger feed check
+requests.post('http://localhost:3000/watch-rss-feeds')
+
+# Add a new feed
+requests.post('http://localhost:3000/add-to-db', json={
+    'feed': {'url': 'https://example.com/feed'}
+})
+
+# Refresh all feeds
+requests.post('http://localhost:3000/refresh-feeds-db', json={
+    'feeds': [
+        {'url': 'https://example.com/feed', 'title': 'Example Feed'}
+    ]
+})
+```
 
 ## How It Works
 

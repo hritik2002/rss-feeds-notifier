@@ -84,7 +84,7 @@ async function processFeed(feed, existingFeeds, db) {
       console.error(`Error parsing feed ${feed.url}:`, parseError.message);
       return;
     }
-    
+
     if (!feedData || !feedData.items || feedData.items.length === 0) {
       console.log(`No items found in feed ${feed.url}`);
       return;
@@ -143,6 +143,18 @@ export async function watchRSSFeeds() {
     );
   } catch (error) {
     console.error("rss watcher error", error);
+  } finally {
+    await db.close();
+  }
+}
+
+export async function addFeedToDb(feed) {
+  const db = await initDB();
+  try {
+    const existingFeeds = await db.all("SELECT * FROM feeds");
+    await processFeed(feed, existingFeeds, db);
+  } catch (error) {
+    throw error;
   } finally {
     await db.close();
   }
