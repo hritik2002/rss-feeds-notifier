@@ -7,6 +7,7 @@ import { initDB } from "./db.js";
 import { sendNewPostEmail } from "./notifier.js";
 import { interests } from "./data/interests.js";
 import { generatePostSummary } from "./llmClient.js";
+import generateCustomRssFeeds from "./customRssGenerator/index.js";
 
 const parser = new RssParser({
   customFields: {
@@ -59,7 +60,7 @@ async function processPost(latestPost, feedData) {
     post: content,
     interests: interests,
   });
-  
+
   if (isRelevant === "yes") {
     await sendNewPostEmail({
       feedTitle: feedData.title,
@@ -77,8 +78,13 @@ async function processFeed(feed, existingFeeds, db) {
       feedData = await parser.parseURL(feed.url);
     } catch (parseError) {
       // Check if it's an XML parsing error (likely redirect to HTML page)
-      if (parseError.message && parseError.message.includes('Unable to parse XML')) {
-        console.error(`Feed ${feed.url} appears to be invalid or redirects to non-RSS content. Skipping.`);
+      if (
+        parseError.message &&
+        parseError.message.includes("Unable to parse XML")
+      ) {
+        console.error(
+          `Feed ${feed.url} appears to be invalid or redirects to non-RSS content. Skipping.`
+        );
         return;
       }
       console.error(`Error parsing feed ${feed.url}:`, parseError.message);
@@ -89,7 +95,7 @@ async function processFeed(feed, existingFeeds, db) {
       console.log(`No items found in feed ${feed.url}`);
       return;
     }
-    
+
     const latestPost = feedData.items[0];
     if (!latestPost || !latestPost.link) {
       console.log(`No valid post found in feed ${feed.url}`);
@@ -125,7 +131,7 @@ async function processFeed(feed, existingFeeds, db) {
 
     console.log("isNewPost", isNewPost);
 
-    if(isNewPost) {
+    if (isNewPost) {
       await processPost(latestPost, feedData);
     }
   } catch (error) {
@@ -160,6 +166,10 @@ export async function addFeedToDb(feed) {
   }
 }
 
-cron.schedule("0 */6 * * *", watchRSSFeeds);
+async function start() {
+  await generateCustomRssFeeds();
+  watchRSSFeeds();
+}
 
-watchRSSFeeds();
+cron.schedule("0 */6 * * *", start);
+start();

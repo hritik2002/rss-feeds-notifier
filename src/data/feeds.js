@@ -78,4 +78,7 @@ export const feeds = [
     url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg",
   },
   { url: "https://hackattic.com/changelog.rss" },
+  {
+    url: "https://rss-feeds-notifier-production.up.railway.app/public/customFeeds/unsloth.xml",
+  },
 ];

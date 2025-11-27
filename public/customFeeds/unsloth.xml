@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <rss version="2.0">
+  <channel>
+    <title>Unsloth Blog</title>
+    <link>https://unsloth.ai/blog</link>
+    <description>RSS feed of the Unsloth blog</description>
+    <lastBuildDate>Thu, 27 Nov 2025 10:40:08 GMT</lastBuildDate>
+    
+      <item>
+        <title>FP8 RL (GRPO)</title>
+        <link>https://docs.unsloth.ai/new/fp8-reinforcement-learning</link>
+        <guid>https://docs.unsloth.ai/new/fp8-reinforcement-learning</guid>
+      </item>
+    
+      <item>
+        <title>DeepSeek-OCR Fine-tuning</title>
+        <link>https://docs.unsloth.ai/new/deepseek-ocr</link>
+        <guid>https://docs.unsloth.ai/new/deepseek-ocr</guid>
+      </item>
+    
+      <item>
+        <title>Quantization-Aware Training (QAT)</title>
+        <link>https://docs.unsloth.ai/new/quantization-aware-training-qat</link>
+        <guid>https://docs.unsloth.ai/new/quantization-aware-training-qat</guid>
+      </item>
+    
+      <item>
+        <title>Unsloth&apos;s new Docker image</title>
+        <link>https://docs.unsloth.ai/new/how-to-train-llms-with-unsloth-and-docker</link>
+        <guid>https://docs.unsloth.ai/new/how-to-train-llms-with-unsloth-and-docker</guid>
+      </item>
+    
+      <item>
+        <title>gpt-oss RL + Auto kernels</title>
+        <link>https://docs.unsloth.ai/new/gpt-oss-reinforcement-learning</link>
+        <guid>https://docs.unsloth.ai/new/gpt-oss-reinforcement-learning</guid>
+      </item>
+    
+      <item>
+        <title>Vision Reinforcement Learning</title>
+        <link>https://docs.unsloth.ai/new/vision-reinforcement-learning-vlm-rl</link>
+        <guid>https://docs.unsloth.ai/new/vision-reinforcement-learning-vlm-rl</guid>
+      </item>
+    
+      <item>
+        <title>Long context gpt-oss Unsloth Flex Attention</title>
+        <link>https://unsloth.ai/blog/gpt-oss-context</link>
+        <guid>https://unsloth.ai/blog/gpt-oss-context</guid>
+      </item>
+    
+      <item>
+        <title>Finetune gpt-oss</title>
+        <link>https://unsloth.ai/blog/gpt-oss</link>
+        <guid>https://unsloth.ai/blog/gpt-oss</guid>
+      </item>
+    
+      <item>
+        <title>Run DeepSeek-V3.1</title>
+        <link>https://unsloth.ai/blog/deepseek-v3.1</link>
+        <guid>https://unsloth.ai/blog/deepseek-v3.1</guid>
+      </item>
+    
+      <item>
+        <title>Fine-tune &amp; Run Gemma 3n</title>
+        <link>https://unsloth.ai/blog/gemma-3n</link>
+        <guid>https://unsloth.ai/blog/gemma-3n</guid>
+      </item>
+    
+      <item>
+        <title>Run &amp; Fine-tune DeepSeek-R1-0528</title>
+        <link>https://unsloth.ai/blog/deepseek-r1-0528</link>
+        <guid>https://unsloth.ai/blog/deepseek-r1-0528</guid>
+      </item>
+    
+      <item>
+        <title>Fine-tuning TTS models</title>
+        <link>https://unsloth.ai/blog/tts</link>
+        <guid>https://unsloth.ai/blog/tts</guid>
+      </item>
+    
+      <item>
+        <title>Run &amp; Fine-tune Qwen3</title>
+        <link>https://unsloth.ai/blog/qwen3</link>
+        <guid>https://unsloth.ai/blog/qwen3</guid>
+      </item>
+    
+      <item>
+        <title>Unsloth Dynamic v2.0 Quants</title>
+        <link>https://unsloth.ai/blog/dynamic-v2</link>
+        <guid>https://unsloth.ai/blog/dynamic-v2</guid>
+      </item>
+    
+      <item>
+        <title>Fine-tune &amp; Run Llama 4</title>
+        <link>https://unsloth.ai/blog/llama4</link>
+        <guid>https://unsloth.ai/blog/llama4</guid>
+      </item>
+    
+      <item>
+        <title>Run Dynamic DeepSeek-V3-0324</title>
+        <link>https://unsloth.ai/blog/deepseek-v3-0324</link>
+        <guid>https://unsloth.ai/blog/deepseek-v3-0324</guid>
+      </item>
+    
+      <item>
+        <title>Fine-tune &amp; Run Gemma 3</title>
+        <link>https://unsloth.ai/blog/gemma3</link>
+        <guid>https://unsloth.ai/blog/gemma3</guid>
+      </item>
+    
+      <item>
+        <title>Long-context GRPO</title>
+        <link>https://unsloth.ai/blog/grpo</link>
+        <guid>https://unsloth.ai/blog/grpo</guid>
+      </item>
+    
+      <item>
+        <title>Run &amp; Finetune QwQ-32B + Bug Fixes</title>
+        <link>https://unsloth.ai/blog/qwq-32b</link>
+        <guid>https://unsloth.ai/blog/qwq-32b</guid>
+      </item>
+    
+      <item>
+        <title>Train your own Reasoning Model</title>
+        <link>https://unsloth.ai/blog/r1-reasoning</link>
+        <guid>https://unsloth.ai/blog/r1-reasoning</guid>
+      </item>
+    
+      <item>
+        <title>Re-introducing Unsloth</title>
+        <link>https://unsloth.ai/blog/reintroducing</link>
+        <guid>https://unsloth.ai/blog/reintroducing</guid>
+      </item>
+    
+      <item>
+        <title>Run 1.58-bit Dynamic DeepSeek-R1</title>
+        <link>https://unsloth.ai/blog/deepseekr1-dynamic</link>
+        <guid>https://unsloth.ai/blog/deepseekr1-dynamic</guid>
+      </item>
+    
+      <item>
+        <title>Phi-4 Finetuning + Bug Fixes</title>
+        <link>https://unsloth.ai/blog/phi4</link>
+        <guid>https://unsloth.ai/blog/phi4</guid>
+      </item>
+    
+      <item>
+        <title>DeepSeek R1 - Run &amp; Finetune</title>
+        <link>https://unsloth.ai/blog/deepseek-r1</link>
+        <guid>https://unsloth.ai/blog/deepseek-r1</guid>
+      </item>
+    
+      <item>
+        <title>Fine-tune Llama 3.3</title>
+        <link>https://unsloth.ai/blog/llama3-3</link>
+        <guid>https://unsloth.ai/blog/llama3-3</guid>
+      </item>
+    
+      <item>
+        <title>Unsloth - Dynamic 4-bit Quantization</title>
+        <link>https://unsloth.ai/blog/dynamic-4bit</link>
+        <guid>https://unsloth.ai/blog/dynamic-4bit</guid>
+      </item>
+    
+      <item>
+        <title>Gradient Accumulation by Unsloth</title>
+        <link>https://unsloth.ai/blog/gradient</link>
+        <guid>https://unsloth.ai/blog/gradient</guid>
+      </item>
+    
+      <item>
+        <title>Llama 3.2 Vision Finetuning</title>
+        <link>https://unsloth.ai/blog/vision</link>
+        <guid>https://unsloth.ai/blog/vision</guid>
+      </item>
+    
+      <item>
+        <title>Finetune &amp; Run Llama 3.1 with Unsloth</title>
+        <link>https://unsloth.ai/blog/llama3-1</link>
+        <guid>https://unsloth.ai/blog/llama3-1</guid>
+      </item>
+    
+      <item>
+        <title>Mistral NeMo Bug Fixes &amp; Ollama support</title>
+        <link>https://unsloth.ai/blog/mistral-nemo</link>
+        <guid>https://unsloth.ai/blog/mistral-nemo</guid>
+      </item>
+    
+      <item>
+        <title>Gemma 2 - 2x faster + 63% less VRAM</title>
+        <link>https://unsloth.ai/blog/gemma2</link>
+        <guid>https://unsloth.ai/blog/gemma2</guid>
+      </item>
+    
+      <item>
+        <title>Continued Pretraining with Unsloth</title>
+        <link>https://unsloth.ai/blog/contpretraining</link>
+        <guid>https://unsloth.ai/blog/contpretraining</guid>
+      </item>
+    
+      <item>
+        <title>Phi-3, Mistral v0.3 and Llama 3 Bug Fixes</title>
+        <link>https://unsloth.ai/blog/phi3</link>
+        <guid>https://unsloth.ai/blog/phi3</guid>
+      </item>
+    
+      <item>
+        <title>Llama 3 - 2x faster + 68% less VRAM</title>
+        <link>https://unsloth.ai/blog/llama3</link>
+        <guid>https://unsloth.ai/blog/llama3</guid>
+      </item>
+    
+      <item>
+        <title>4x longer context windows &amp; 1.7x larger batch sizes</title>
+        <link>https://unsloth.ai/blog/long-context</link>
+        <guid>https://unsloth.ai/blog/long-context</guid>
+      </item>
+    
+      <item>
+        <title>Unsloth Google Gemma Bug Fixes</title>
+        <link>https://unsloth.ai/blog/gemma-bugs</link>
+        <guid>https://unsloth.ai/blog/gemma-bugs</guid>
+      </item>
+    
+      <item>
+        <title>2.4x faster Gemma + 58% less VRAM</title>
+        <link>https://unsloth.ai/blog/gemma</link>
+        <guid>https://unsloth.ai/blog/gemma</guid>
+      </item>
+    
+      <item>
+        <title>Hugging Face + Unsloth 2024 Collab</title>
+        <link>https://huggingface.co/blog/unsloth-trl</link>
+        <guid>https://huggingface.co/blog/unsloth-trl</guid>
+      </item>
+    
+      <item>
+        <title>New Mistral support + Benchmarks</title>
+        <link>https://unsloth.ai/blog/mistral-benchmark</link>
+        <guid>https://unsloth.ai/blog/mistral-benchmark</guid>
+      </item>
+    
+      <item>
+        <title>Introduction</title>
+        <link>https://unsloth.ai/blog/reintroducing</link>
+        <guid>https://unsloth.ai/blog/reintroducing</guid>
+      </item>
+    
+      <item>
+        <title>🐋  Docker</title>
+        <link>https://docs.unsloth.ai/new/how-to-train-llms-with-unsloth-and-docker</link>
+        <guid>https://docs.unsloth.ai/new/how-to-train-llms-with-unsloth-and-docker</guid>
+      </item>
+    
+  </channel>
+  </rss>
