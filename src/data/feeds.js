@@ -72,7 +72,10 @@ export const feeds = [
   { url: " https://blog.x.com/engineering/en_us/blog.rss" },
   { url: "https://medium.com/feed/better-humans" },
   { url: "http://news.mit.edu/rss/topic/artificial-intelligence2" },
-  {url: "https://blog.evjang.com/feeds/posts/default?alt=rss"},
-  {url: "https://www.ycombinator.com/blog/feed/"},
-  {url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg" },
+  { url: "https://blog.evjang.com/feeds/posts/default?alt=rss" },
+  { url: "https://www.ycombinator.com/blog/feed/" },
+  {
+    url: "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg",
+  },
+  { url: "https://hackattic.com/changelog.rss" },
 ];

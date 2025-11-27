@@ -34,10 +34,9 @@ app.post("/add-to-db", async (req, res) => {
 app.post("/refresh-feeds-db", async (req, res) => {
   try {
     const { feeds } = req.body;
-    
+
     const db = await initDB();
 
-    // clear all feeds from db
     await db.exec("DELETE FROM feeds");
 
     await Promise.all(
