@@ -69,10 +69,10 @@ function getEmailHtml({ feedTitle, postTitle, postLink, summary }) {
 }
 
 function getBatchEmailHtml(posts) {
-  const postsHtml = posts.map(({ feedTitle, postTitle, postLink, summary }) => `
+  const postsHtml = posts.map(({ feedTitle, postTitle, postLink, summary }, index) => `
     <tr>
-      <td style="padding: 0 0 32px 0;">
-        <h2 style="font-size: 20px; color: #111827; margin-bottom: 12px;">${feedTitle}</h2>
+      <td style="padding: ${index === 0 ? '0' : '40px'} 0 ${index === posts.length - 1 ? '0' : '40px'} 0; ${index < posts.length - 1 ? 'border-bottom: 1px solid #e5e7eb;' : ''}">
+        <h2 style="font-size: 20px; color: #111827; margin: 0 0 12px 0;">${feedTitle}</h2>
         
         <!-- Link Preview -->
         <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin-bottom: 20px;">
@@ -92,11 +92,11 @@ function getBatchEmailHtml(posts) {
         </table>
         
         <a href="${postLink}" 
-          style="display: inline-block; background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 500; font-size: 15px;">
+          style="display: inline-block; background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px; font-weight: 500; font-size: 15px; margin-bottom: 24px;">
           Read Full Post →
         </a>
         
-        <p style="margin-top: 24px; font-size: 14px; color: #6b7280;">
+        <p style="margin: 0; font-size: 14px; color: #6b7280;">
           Or open this link directly:<br />
           <a href="${postLink}" style="color: #2563eb; word-break: break-all;">${postLink}</a>
         </p>
