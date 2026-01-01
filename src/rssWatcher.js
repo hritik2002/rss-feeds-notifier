@@ -4,7 +4,7 @@ import * as cheerio from "cheerio";
 import fetch from "node-fetch";
 import { feeds } from "./data/feeds.js";
 import { initDB } from "./db.js";
-import { sendNewPostEmail } from "./notifier.js";
+import { sendNewPostEmail, sendBatchEmail } from "./notifier.js";
 import { interests } from "./data/interests.js";
 import { generatePostSummary } from "./llmClient.js";
 import generateCustomRssFeeds from "./customRssGenerator/index.js";
@@ -50,7 +50,7 @@ async function getContent(postLink) {
   }
 }
 
-async function processPost(latestPost, feedData) {
+async function processPost(latestPost, feedData, postsQueue) {
   const textContent = await getContent(latestPost.link);
   const content = textContent ?? latestPost.content;
 
@@ -62,7 +62,7 @@ async function processPost(latestPost, feedData) {
   });
 
   if (isRelevant === "yes") {
-    await sendNewPostEmail({
+    postsQueue.push({
       feedTitle: feedData.title,
       postTitle: latestPost.title,
       postLink: latestPost.link,
@@ -71,7 +71,7 @@ async function processPost(latestPost, feedData) {
   }
 }
 
-async function processFeed(feed, existingFeeds, db) {
+async function processFeed(feed, existingFeeds, db, postsQueue) {
   try {
     let feedData;
     try {
@@ -132,7 +132,7 @@ async function processFeed(feed, existingFeeds, db) {
     console.log("isNewPost", isNewPost);
 
     if (isNewPost) {
-      await processPost(latestPost, feedData);
+      await processPost(latestPost, feedData, postsQueue);
     }
   } catch (error) {
     console.error(`Error processing feed ${feed.url}:`, error.message);
@@ -141,12 +141,21 @@ async function processFeed(feed, existingFeeds, db) {
 
 export async function watchRSSFeeds() {
   const db = await initDB();
+  const postsQueue = [];
+  
   try {
     const existingFeeds = await db.all("SELECT * FROM feeds");
 
     await Promise.all(
-      feeds.map((feed) => processFeed(feed, existingFeeds, db))
+      feeds.map((feed) => processFeed(feed, existingFeeds, db, postsQueue))
     );
+
+    // Send batch email with all collected posts
+    if (postsQueue.length > 0) {
+      await sendBatchEmail(postsQueue);
+    } else {
+      console.log("No new relevant posts to send");
+    }
   } catch (error) {
     console.error("rss watcher error", error);
   } finally {
@@ -156,9 +165,16 @@ export async function watchRSSFeeds() {
 
 export async function addFeedToDb(feed) {
   const db = await initDB();
+  const postsQueue = [];
+  
   try {
     const existingFeeds = await db.all("SELECT * FROM feeds");
-    await processFeed(feed, existingFeeds, db);
+    await processFeed(feed, existingFeeds, db, postsQueue);
+    
+    // Send batch email with all collected posts
+    if (postsQueue.length > 0) {
+      await sendBatchEmail(postsQueue);
+    }
   } catch (error) {
     throw error;
   } finally {
